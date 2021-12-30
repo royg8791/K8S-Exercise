@@ -42,6 +42,8 @@ Instalation:
 
     kubernetes cluster: Multi Node/VM Cluster
 
+    used calico as CNI (Container Network Interface) - see /calico.yaml
+
     nginx instalation: 'apt install nginx'
 
     Had to add NGINX reverse-proxy for it to work and redirect from specific Domain-name to Service:Port
