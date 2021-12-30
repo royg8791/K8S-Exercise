@@ -4,7 +4,9 @@ MiniKube (single Node/VM) and KubeADM (Multi Node/VM)
 # Kubernetes
 
 Instalation:
+
     minikube - https://minikube.sigs.k8s.io/docs/start/
+    
     kubeadm, kubectl, kubelet - https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl
 
 
