@@ -1,0 +1,133 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bear
+  labels:
+    bear: animal
+spec:
+  containers:
+  - name: bear
+    image: supergiantkir/animals:bear
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bear
+spec:
+  type: NodePort
+  selector:
+    bear: animal
+  ports:
+  - port: 80
+    nodePort: 31111
+    protocol: TCP
+    targetPort: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hare
+  labels:
+    hare: animal
+spec:
+  containers:
+  - name: hare
+    image: supergiantkir/animals:hare
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hare
+spec:
+  type: NodePort
+  selector:
+    hare: animal
+  ports:
+  - port: 80
+    nodePort: 31112
+    protocol: TCP
+    targetPort: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: moose
+  labels:
+    moose: animal
+spec:
+  containers:
+  - name: moose
+    image: supergiantkir/animals:moose
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moose
+spec:
+  type: NodePort
+  selector:
+    moose: animal
+  ports:
+  - port: 80
+    nodePort: 31113
+    protocol: TCP
+    targetPort: 80
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: animals
+#   labels:
+#     bear: animal
+#     hare: animal
+#     moose: animal
+# spec:
+#   rules:
+#   - host: k8s02.nif.catchmedia.com
+#     http:
+#       paths:
+#       - pathType: Prefix
+#         path: "/"
+#         backend:
+#           service:
+#             name: bear
+#             port: 
+#               number: 80
+#   - host: hare.nif.catchmedia.com
+#     http:
+#       paths:
+#       - pathType: Prefix
+#         path: "/"
+#         backend:
+#           service:
+#             name: hare
+#             port: 
+#               number: 80
+#   - host: moose.nif.catchmedia.com
+#     http:
+#       paths:
+#       - pathType: Prefix
+#         path: "/"
+#         backend:
+#           service:
+#             name: moose
+#             port: 
+#               number: 80
