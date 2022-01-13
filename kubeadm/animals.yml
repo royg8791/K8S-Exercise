@@ -90,44 +90,45 @@ spec:
     nodePort: 31113
     protocol: TCP
     targetPort: 80
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: animals
-#   labels:
-#     bear: animal
-#     hare: animal
-#     moose: animal
-# spec:
-#   rules:
-#   - host: k8s02.nif.catchmedia.com
-#     http:
-#       paths:
-#       - pathType: Prefix
-#         path: "/"
-#         backend:
-#           service:
-#             name: bear
-#             port: 
-#               number: 80
-#   - host: hare.nif.catchmedia.com
-#     http:
-#       paths:
-#       - pathType: Prefix
-#         path: "/"
-#         backend:
-#           service:
-#             name: hare
-#             port: 
-#               number: 80
-#   - host: moose.nif.catchmedia.com
-#     http:
-#       paths:
-#       - pathType: Prefix
-#         path: "/"
-#         backend:
-#           service:
-#             name: moose
-#             port: 
-#               number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: animals
+  labels:
+    bear: animal
+    hare: animal
+    moose: animal
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: bear.nif.catchmedia.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: bear
+            port: 
+              number: 80
+  - host: hare.nif.catchmedia.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: hare
+            port: 
+              number: 80
+  - host: moose.nif.catchmedia.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: moose
+            port: 
+              number: 80
