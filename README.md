@@ -40,11 +40,13 @@ Instalation:
     kubernetes cluster: Multi Node/VM Cluster
 
     used calico as CNI (Container Network Interface) - see /calico.yaml
+        ##### kubectl apply -f calico.yaml
+
+    In order to use PersistentVolumes, master NODE needs to be untainted:
+        ##### kubectl taint node k8s01 node-role.kubernetes.io/master="":NoSchedule-
 
     installed ingress-nginx via "HELM" https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx
-        ```
         ##### helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-        ```
         ##### helm repo update
         ##### helm install ingress-nginx ingress-nginx/ingress-nginx
         had to change "externalIPs" of the service to master node IP
@@ -79,11 +81,11 @@ Instalation:
 
     DokuWiki:
         created DokuWiki Pod using HELM. see: https://www.dokuwiki.org/dokuwiki
-
+        ```
         ##### helm install wiki k8s-at-home/dokuwiki
-
+        ```
         Ingress
-            Ingress needs to be added manually. file: dokuwiki_ingress.yml
+            ```Ingress needs to be added manually. file: dokuwiki_ingress.yml```
 
         After creation, use Logs to monitor propper Pod creation:
         ##### kubectl logs wiki-dokuwiki-69858dc8f5-4fld4 <<<<<"pod name"
