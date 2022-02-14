@@ -42,7 +42,7 @@ Instalation:
     used calico as CNI (Container Network Interface) - see /calico.yaml
 
     installed ingress-nginx via "HELM" https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx
-        ##### helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+        ```##### helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx```
         ##### helm repo update
         ##### helm install ingress-nginx ingress-nginx/ingress-nginx
         had to change "externalIPs" of the service to master node IP
