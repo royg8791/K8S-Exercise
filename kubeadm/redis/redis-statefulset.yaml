@@ -46,13 +46,29 @@ spec:
       containers:
       - name: redis
         image: redis:6.2.3-alpine
-        command: ["redis-server"]
-        args: ["/etc/redis/redis.conf"]
+        command: [ "redis-server" ]
+        args: [ "/etc/redis/redis.conf" ]
+        # command: [ "sh", "-c" ]
+        # args:
+        #   - |
+        #     redis-server /etc/redis/redis.conf &
+        #     sleep 5
+
+        #     replication=$(redis-cli info replication|sed 's/\r//g')
+        #     if [ "$(echo "$replication"|grep "role:"|cut -d: -f2)" == "master" ]; then
+        #       master_ip=$(cat /etc/hosts|grep $(hostname)|awk '{print $1}')              
+        #       echo "$master_ip" > /data/master_ip
+        #     else
+        #       master=$(echo "$replication"|grep "master_host:"|cut -d: -f2)
+        #       master_ip=$(ping -c1 $master|head -1|cut -d\( -f2|cut -d\) -f1)
+        #       echo "$master_ip" > /data/master_ip              
+        #     fi
+        #     sleep 86400
         ports:
         - containerPort: 6379
           name: redis
         volumeMounts:
-        - name: data
+        - name: redis
           mountPath: /data
         - name: redis-config
           mountPath: /etc/redis/
@@ -62,12 +78,12 @@ spec:
       - name: config
         configMap:
           name: redis-config
-  volumeClaimTemplates:
+  volumeClaimTemplates: # creates PersistentVolumeClaim for each Pod
   - metadata:
-      name: data
+      name: redis
     spec:
       accessModes: [ "ReadWriteMany" ]
-      storageClassName: "redis-sc"
+      storageClassName: "redis"
       resources:
         requests:
           storage: 50Mi

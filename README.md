@@ -74,3 +74,15 @@ Instalation:
             when hiting REFRESH in the webpage - it will change IP to the next Pod
         Ingress             - 1 (webtest):
             exposes every service on a specific domain name (+ "ingressClassName: nginx")
+
+    DokuWiki:
+        created DokuWiki Pod using HELM. see: https://www.dokuwiki.org/dokuwiki
+
+        ##### helm install wiki k8s-at-home/dokuwiki
+
+        Ingress
+            Ingress needs to be added manually. file: dokuwiki_ingress.yml
+
+        After creation, use Logs to monitor propper Pod creation:
+        ##### kubectl logs wiki-dokuwiki-69858dc8f5-4fld4 <<<<<"pod name"
+
