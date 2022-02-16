@@ -6,6 +6,8 @@ Instalation:
 
     kubeadm, kubectl, kubelet - https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl
 
+        After creation, use Logs to monitor propper Pod creation:
+        ##### kubectl logs "pod_name"
 
 /minikube/:
 
@@ -101,5 +103,34 @@ Instalation:
             ##### helm install wiki ./          <<<<< from within the repository directory >>>>>
             ##### kubectl apply -f apply-locally.yaml         <<<<< to add missing components >>>>>
 
-        After creation, use Logs to monitor propper Pod creation:
-        ##### kubectl logs wiki-dokuwiki-69858dc8f5-4fld4 <<<<<"pod name"
+    Redmine:
+        see: https://www.redmine.org/
+
+        Pulled Redmine repository using "helm pull".
+            ##### helm pull bitnami/redmine
+            directory: "redmine"
+
+        ##### cd redmine           <<< move into repository >>>
+
+        I removed Persistent Volume from "mariadb" and "postgresql" [./redmine/values.yaml] file.
+        ** it needs a different provitioner in order to work.
+            mariadb:
+              primary:
+                persistence:
+                  enabled: false
+                ...
+            postgresql:
+              persistence:
+                enabled: false
+
+        I added Ingress by editing [./redmine/values.yaml] file.
+            ingress:
+              enabled: true
+              className: nginx                         <<<<< nginx-ingress-controller is used from k8s instalation >>>>>
+              hostname: capture.nif.catchmedia.com           <<<<< domain name pointing to master node IP >>>>>
+
+        I created a YAML file that contains PV to run locally with the helm chart > "apply-locally.yaml"
+
+        To run everything:
+            ##### helm install redmine ./          <<<<< from within the repository directory >>>>>
+            ##### kubectl apply -f apply-locally.yaml         <<<<< to add missing components >>>>>
