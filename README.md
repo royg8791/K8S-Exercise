@@ -80,13 +80,26 @@ Instalation:
             exposes every service on a specific domain name (+ "ingressClassName: nginx")
 
     DokuWiki:
-        created DokuWiki Pod using HELM. see: https://www.dokuwiki.org/dokuwiki
-        ```
-        ##### helm install wiki k8s-at-home/dokuwiki
-        ```
-        Ingress
-            ```Ingress needs to be added manually. file: dokuwiki_ingress.yml```
+        see: https://www.dokuwiki.org/dokuwiki
+
+        Pulled DokuWiki repository using "helm pull".
+            ##### helm pull k8s-at-home/dokuwiki
+            directory: "dokuwiki"
+
+        ##### cd dokuwiki           <<< move into repository >>>
+        I added Persistent Volume to the Helm chart by editing [./dokuwiki/charts/common/values.yaml] file.
+            persistence:
+              config:
+                enabled: true
+                ...
+                mountPath: /config/dokuwiki/data          <<< where the data of dokuwiki is stored >>>
+
+
+        I created a YAML file that contains PV and Ingress to run locally with the helm chart > "apply-locally.yaml"
+
+        To run everything:
+            ##### helm install wiki ./          <<<<< from within the repository directory >>>>>
+            ##### kubectl apply -f apply-locally.yaml         <<<<< to add missing components >>>>>
 
         After creation, use Logs to monitor propper Pod creation:
         ##### kubectl logs wiki-dokuwiki-69858dc8f5-4fld4 <<<<<"pod name"
-

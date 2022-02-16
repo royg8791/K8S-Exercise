@@ -1,0 +1,26 @@
+annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: Initial chart version
+apiVersion: v2
+appVersion: 20200729.0.0
+dependencies:
+- name: common
+  repository: https://library-charts.k8s-at-home.com
+  version: 4.3.0
+description: DokuWiki is a simple to use and highly versatile Open Source wiki software
+  that doesn't require a database.
+home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/dokuwiki
+icon: https://www.dokuwiki.org/lib/tpl/dokuwiki/images/logo.png
+keywords:
+- dokuwiki
+- wiki
+kubeVersion: '>=1.16.0-0'
+maintainers:
+- email: psych0d0g@users.noreply.github.com
+  name: psych0d0g
+name: dokuwiki
+sources:
+- https://github.com/splitbrain/dokuwiki
+- https://github.com/linuxserver/docker-dokuwiki
+version: 1.0.0
