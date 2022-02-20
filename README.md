@@ -134,3 +134,16 @@ Instalation:
         To run everything:
             ##### helm install redmine ./          <<<<< from within the repository directory >>>>>
             ##### kubectl apply -f apply-locally.yaml         <<<<< to add missing components >>>>>
+
+    Gitlab:
+        see: https://about.gitlab.com//
+        info about instalation: https://medium.com/@SergeyNuzhdin/how-to-easily-deploy-gitlab-on-kubernetes-75f5868cea78
+
+        I built a YAML file from a git repository: https://github.com/lwolf/kubernetes-gitlab
+        File: gitlab.yaml
+
+        To run:
+            ##### kubectl apply -f gitlab.yaml
+        
+        *** there are no persistent volumes attached to the entities, to add it follow the instructions in the instalation guide in the Git Repository linked above.
+            *** in general, create PV and PVC, then change the "emptyDir: {}" to your desired persistent volume.
