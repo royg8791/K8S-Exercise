@@ -147,3 +147,25 @@ Instalation:
         
         *** there are no persistent volumes attached to the entities, to add it follow the instructions in the instalation guide in the Git Repository linked above.
             *** in general, create PV and PVC, then change the "emptyDir: {}" to your desired persistent volume.
+
+    Seafile:
+        see: https://www.seafile.com//
+
+        I built a YAML file from a HELM repository: n0rad/seafile
+        File: seafile.yaml
+
+        To run:
+            ##### kubectl apply -f gitlab.yaml
+        
+        after running there are a few more steps:...
+        enter the pod and start "seafile":
+            ##### kubectl exec -it seafile-55575b79f9-tcwmw bash
+        once inside the pod, run /opt/seafile/seafile-server-6.3.4/setup-seafile.sh file and follow the instructions:
+            ##### /opt/seafile/seafile-server-6.3.4/setup-seafile.sh
+                    ** it will ask to install sqlite3 - do it
+                follow setup instructions:
+                    # Where would you like to store your seafile data? 
+                    # Note: Please use a volume with enough free space.
+                    # [default: /opt/seafile/seafile-data ] 
+                for path to store seafile data write: <<<<< /shared/data >>>>>
+            after finishing the instalation, seafile should be accesible from webpage.
