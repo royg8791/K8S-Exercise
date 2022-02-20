@@ -159,13 +159,12 @@ Instalation:
         
         after running there are a few more steps:...
         enter the pod and start "seafile":
-            ##### kubectl exec -it seafile-55575b79f9-tcwmw bash
-        once inside the pod, run /opt/seafile/seafile-server-6.3.4/setup-seafile.sh file and follow the instructions:
+            ##### kubectl exec -it seafile-55575b79f9-tcwmw bash      <<<<< to enter the pod >>>>>
+        once inside the pod, run /opt/seafile/seafile-server-6.3.4/setup-seafile.sh and follow the instructions:
             ##### /opt/seafile/seafile-server-6.3.4/setup-seafile.sh
-                    ** it will ask to install sqlite3 - do it
                 follow setup instructions:
                     # Where would you like to store your seafile data? 
                     # Note: Please use a volume with enough free space.
                     # [default: /opt/seafile/seafile-data ] 
                 for path to store seafile data write: <<<<< /shared/data >>>>>
-            after finishing the instalation, seafile should be accesible from webpage.
+        after finishing the instalation, seafile should be accesible from webpage.
